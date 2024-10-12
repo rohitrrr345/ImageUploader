@@ -1,34 +1,30 @@
 // imageReducer.js
 import { createReducer } from '@reduxjs/toolkit';
 
-const initialState = {
-  items: [],
-  status: 'idle',
-  error: null,
-};
 
-export const imageReducer = createReducer(initialState, {
+export const imageReducer = createReducer({}, {
   uploadImageRequest: (state) => {
-    state.status = 'loading';
+    state.loading = true;
   },
   uploadImageSuccess: (state, action) => {
-    state.status = 'succeeded';
-    state.items.push(action.payload);
+    state.loading = false;
+    state.images=action.payload.user;
+    state.message=action.payload.message;
   },
   uploadImageFailure: (state, action) => {
-    state.status = 'failed';
+    state.loading = false;
     state.error = action.payload;
   },
 
   fetchImagesRequest: (state) => {
-    state.status = 'loading';
+    state.loading = true;
   },
   fetchImagesSuccess: (state, action) => {
-    state.status = 'succeeded';
-    state.items = action.payload;
+    state.loading = false;
+    state.images = action.payload;
   },
   fetchImagesFailure: (state, action) => {
-    state.status = 'failed';
+    state.loading = false;
     state.error = action.payload;
   },
 

@@ -8,7 +8,7 @@ export const uploadImage = (formData) => async (dispatch) => {
     const { data } = await axios.post(`${process.env.REACT_APP_SERVER}/api/images`, formData, {
       withCredentials: true,
     });
-
+          
     dispatch({
       type: 'uploadImageSuccess',
       payload: data,

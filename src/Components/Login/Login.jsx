@@ -1,7 +1,10 @@
 // Login.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import "./Login.css";
 import { loginUser } from '../../Actions/authActions';
+import { Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,22 +17,35 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="login">
+      <form className="loginForm" onSubmit={handleSubmit}>
+        <Typography variant="h3" style={{ padding: "2vmax" }}>
+          Uploader
+        </Typography>
+
         <input
           type="email"
           placeholder="Email"
+          required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+
         <input
           type="password"
           placeholder="Password"
+          required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+
+       
+
+        <Button type="submit">Login</Button>
+
+        <Link to="/register">
+          <Typography>New User?</Typography>
+        </Link>
       </form>
     </div>
   );

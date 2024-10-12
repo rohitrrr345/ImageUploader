@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Signup from './Components/Signup';
 import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadUser } from './Actions/authActions';
 import ImageGallery from './Components/ImageGallary';
 import Login from './Components/Login/Login';
+import ImageUpload from './Components/Upload/imageUpload';
+import { loadUser } from './Actions/authActions';
 
 const App = () => {
   const { isAuthenticated,  message, error, loading } = useSelector(
@@ -51,7 +51,9 @@ const App = () => {
             path='/login'
             element={isAuthenticated ? <ImageGallery /> : <Login />}
           />
-          <Route path='/' element={<Signup />} />
+              <Route path='/upload' element={isAuthenticated ? <ImageUpload /> : <Login />}/>
+
+    <Route path='/signup' element={isAuthenticated ? <ImageGallery /> : <Signup />}/>
         </Routes>
         <Toaster />
       </Router>
