@@ -1,7 +1,7 @@
 // Login.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../actions/authActions';
+import { loginUser } from '../../Actions/authActions';
 
 const Login = () => {
   const [email, setEmail] = useState('');

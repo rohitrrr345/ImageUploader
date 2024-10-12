@@ -51,7 +51,7 @@ export const loadUser = () => async dispatch => {
       dispatch({ type: 'loadUserRequest' });
   
       const { data } = await axios.get(
-        `${import.meta.env.VITE_SERVER}/api/v1/me`,
+        `${import.meta.env.VITE_SERVER}/api/users/me`,
   
         {
           withCredentials: true,

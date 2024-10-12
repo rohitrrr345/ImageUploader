@@ -28,14 +28,14 @@ const ImageGallery = () => {
     <div>
       <h2>Image Gallery</h2>
       <div className="gallery">
-        {images.map((img) => (
-          <div key={img._id} className="image-card" onClick={() => openModal(img)}>
-            <img src={img.imageUrl} alt={img.title} />
-            <h3>{img.title}</h3>
-            <p>{img.description}</p>
-            <p>Views: {img.viewCount}</p>
+        {/* {images.map((img) => ( */}
+          <div key={'mg._id'} className="image-card" onClick={() => openModal(img)}>
+            <img src={'img.imageUrl'} alt={'img.title'} />
+            <h3>{'img'}</h3>
+            <p>{'img'}</p>
+            <p>Views: {'img.viewCount'}</p>
           </div>
-        ))}
+        {/* ))} */}
       </div>
 
       {/* Modal for image details */}

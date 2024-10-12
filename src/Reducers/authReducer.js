@@ -2,7 +2,10 @@
 import { createReducer } from '@reduxjs/toolkit';
 
 const initialState = {
- 
+  loading: false,
+  isAuthenticated: false,
+  user: null,
+  error: null,
 };
 
 export const authReducer = createReducer(initialState, {
@@ -11,13 +14,12 @@ export const authReducer = createReducer(initialState, {
   },
   loginSuccess: (state, action) => {
     state.loading = false;
-    state.isAuthenticated=true;
+    state.isAuthenticated = true;
     state.user = action.payload;
   },
   loginFailure: (state, action) => {
     state.loading = false;
-    state.isAuthenticated=true;
-
+    state.isAuthenticated = false; // Should be false on failure
     state.error = action.payload;
   },
 
@@ -25,14 +27,19 @@ export const authReducer = createReducer(initialState, {
     state.loading = true;
   },
   signupSuccess: (state, action) => {
-    state.loading =false;
+    state.loading = false;
+    state.isAuthenticated = true; // Should be false on failure
+
     state.user = action.payload;
   },
   signupFailure: (state, action) => {
-    state.loading = false
+    state.loading = false;
+    state.isAuthenticated = false; // Should be false on failure
+
     state.error = action.payload;
   },
-  loadUserRequest: state => {
+  
+  loadUserRequest: (state) => {
     state.loading = true;
   },
   loadUserSuccess: (state, action) => {
@@ -45,10 +52,12 @@ export const authReducer = createReducer(initialState, {
     state.isAuthenticated = false;
     state.error = action.payload;
   },
-  clearError: state => {
+
+  clearError: (state) => {
     state.error = null;
   },
-  clearMessage: state => {
+  
+  clearMessage: (state) => {
     state.message = null;
   },
 });
