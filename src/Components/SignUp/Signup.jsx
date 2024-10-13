@@ -67,7 +67,7 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Link to="/signup">
+        <Link to="/login">
           <Typography>Already Signed Up? Login Now</Typography>
         </Link>
 

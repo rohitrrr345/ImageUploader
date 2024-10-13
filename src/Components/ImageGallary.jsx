@@ -5,7 +5,7 @@ import { fetchImages } from '../Actions/imageActions';
 import ImgMediaCard from './Card/Card';
 import "./gallary.css";
 
-const ImageGallery = () => {
+const ImageGallery = ({username}) => {
   const dispatch = useDispatch();
   const imagesData = useSelector((state) => state.images);
   const [selectedImage, setSelectedImage] = useState(null); // to hold selected image data
@@ -27,7 +27,10 @@ const ImageGallery = () => {
 
   return (
     <div className='map'>
-      <h2>Image Gallery</h2>
+      <h1 style={{
+        textAlign:'center',
+        color:'white'
+      }}> welcome Back {username}</h1>
       <div className="gallery">
         {imagesData.images?.images && Array.isArray(imagesData.images?.images) && imagesData.images.images.length > 0 ? (
           imagesData.images.images.map((img) => (

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux'; // Import useDispatch from redux
-import { incrementViewCount } from '../Actions/imageActions'; // Import the action to increment views
+import { fetchImages, incrementViewCount } from '../Actions/imageActions'; // Import the action to increment views
 import './modal.css';
 
 const ImageModal = ({ isOpen, onClose, image }) => {
@@ -12,6 +12,12 @@ const ImageModal = ({ isOpen, onClose, image }) => {
       dispatch(incrementViewCount(image._id));
     }
   }, [isOpen, image, dispatch]);
+useEffect(() => {
+  
+  dispatch(fetchImages());
+
+ 
+}, [onClose])
 
   if (!isOpen || !image) return null;
 

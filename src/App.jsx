@@ -10,7 +10,7 @@ import Signup from './Components/SignUp/Signup';
 import Header from './Components/Header/Header';
 import './App.css'
 const App = () => {
-  const { isAuthenticated,  message, error, loading } = useSelector(
+  const { isAuthenticated,user,  message, error, loading } = useSelector(
     state => state.auth || {}
   );
 
@@ -22,6 +22,11 @@ const App = () => {
   }, [isAuthenticated]);
 
   // Handle errors and messages
+
+  // Load user on component mount
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -34,16 +39,10 @@ const App = () => {
     }
   }, [dispatch, error, message]);
 
-  // Load user on component mount
-  useEffect(() => {
-    dispatch(loadUser());
-  }, [dispatch]);
-
   // Show loading spinner if still fetching user data
   if (loading) {
     return <p>Loading...</p>;
   }
-
   return (
     <>
       <Router>
@@ -51,13 +50,20 @@ const App = () => {
 
         <Routes>
           {/* Show ImageGallery if authenticated, else show Login */}
+          <Route path='/login' element={ <Login />}/>
+
           <Route
+            path='/'
+            element={isAuthenticated ? <ImageGallery username={user.username} /> : <Login />}
+          />
+{console.log(user?.username)
+}          <Route
             path='/gallary'
-            element={isAuthenticated ? <ImageGallery /> : <Login />}
+            element={isAuthenticated ? <ImageGallery username={user.username} /> : <Login />}
           />
               <Route path='/upload' element={isAuthenticated ? <ImageUpload /> : <Login />}/>
 
-    <Route path='/signup' element={isAuthenticated ? <ImageGallery /> : <Signup />}/>
+    <Route path='/signup' element={isAuthenticated ? <ImageGallery username={user.username} /> : <Signup />}/>
         </Routes>
         <Toaster />
       </Router>

@@ -54,9 +54,9 @@ export const incrementViewCount = (imageId) => async (dispatch) => {
   dispatch({ type: 'incrementViewCountRequest' });
 
   try {
-    const { data } = await axios.post(
-      `${import.meta.env.VITE_SERVER}/api/images/image/${imageId}/views`,
-      {},
+    const { data } = await axios.put(
+      `${import.meta.env.VITE_SERVER}/api/images/image/${imageId}/view`,
+      {}, // Empty body for the PUT request
       { withCredentials: true }
     );
 

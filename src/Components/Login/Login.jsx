@@ -43,7 +43,7 @@ const Login = () => {
 
         <Button type="submit">Login</Button>
 
-        <Link to="/register">
+        <Link to="/signup">
           <Typography>New User?</Typography>
         </Link>
       </form>
