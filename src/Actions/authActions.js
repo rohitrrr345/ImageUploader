@@ -62,3 +62,23 @@ export const loadUser = () => async dispatch => {
       dispatch({ type: 'loadUserFail', payload: error.response.data.message });
     }
   };
+export const logoutUser = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "LogoutUserRequest",
+    });
+
+    await axios.get(`${process.env.REACT_APP_SERVER}/api/v1/logout`, {
+      withCredentials: true, // Include cookies with the request
+    });
+
+    dispatch({
+      type: "LogoutUserSuccess",
+    });
+  } catch (error) {
+    dispatch({
+      type: "LogoutUserFailure",
+      payload: error.response?.data?.message || "Logout failed",
+    });
+  }
+};
