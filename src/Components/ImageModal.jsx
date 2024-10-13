@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux'; // Import useDispatch from redux
-import { fetchImages, incrementViewCount } from '../Actions/imageActions'; // Import the action to increment views
+import { useDispatch } from 'react-redux'; 
+import { fetchImages, incrementViewCount } from '../Actions/imageActions'; 
 import './modal.css';
 
 const ImageModal = ({ isOpen, onClose, image }) => {
@@ -8,7 +8,6 @@ const ImageModal = ({ isOpen, onClose, image }) => {
 
   useEffect(() => {
     if (isOpen && image) {
-      // Dispatch the action to increment the view count when the modal opens
       dispatch(incrementViewCount(image._id));
     }
   }, [isOpen, image, dispatch]);

@@ -9,6 +9,7 @@ import { loadUser } from './Actions/authActions';
 import Signup from './Components/SignUp/Signup';
 import Header from './Components/Header/Header';
 import './App.css'
+import Loader from './Components/Loader/Loader';
 const App = () => {
   const { isAuthenticated,user,  message, error, loading } = useSelector(
     state => state.auth || {}
@@ -16,14 +17,11 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  // Monitor changes in isAuthenticated and loading
   useEffect(() => {
     console.log('isAuthenticated changed:', isAuthenticated);
   }, [isAuthenticated]);
 
-  // Handle errors and messages
 
-  // Load user on component mount
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch]);
@@ -39,9 +37,8 @@ const App = () => {
     }
   }, [dispatch, error, message]);
 
-  // Show loading spinner if still fetching user data
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loader/>
   }
   return (
     <>
@@ -49,7 +46,6 @@ const App = () => {
       {isAuthenticated && <Header />}
 
         <Routes>
-          {/* Show ImageGallery if authenticated, else show Login */}
           <Route path='/login' element={ <Login />}/>
 
           <Route

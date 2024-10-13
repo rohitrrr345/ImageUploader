@@ -8,15 +8,15 @@ import "./gallary.css";
 const ImageGallery = ({username}) => {
   const dispatch = useDispatch();
   const imagesData = useSelector((state) => state.images);
-  const [selectedImage, setSelectedImage] = useState(null); // to hold selected image data
-  const [isModalOpen, setModalOpen] = useState(false); // to control modal visibility
+  const [selectedImage, setSelectedImage] = useState(null); 
+  const [isModalOpen, setModalOpen] = useState(false); 
 
   useEffect(() => {
     dispatch(fetchImages());
   }, [dispatch]);
 
   const openModal = (image) => {
-    setSelectedImage(image); // pass the clicked image data to the state
+    setSelectedImage(image);
     setModalOpen(true);
   };
 
@@ -40,7 +40,7 @@ const ImageGallery = ({username}) => {
               title={img.title} 
               description={img.description} 
               views={img.views} 
-              openModal={() => openModal(img)} // open modal with clicked image data
+              openModal={() => openModal(img)} 
             />
           ))
         ) : (
@@ -48,7 +48,6 @@ const ImageGallery = ({username}) => {
         )}
       </div>
 
-      {/* Modal for image details */}
       <ImageModal isOpen={isModalOpen} onClose={closeModal} image={selectedImage} />
     </div>
   );
