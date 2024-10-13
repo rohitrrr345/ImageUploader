@@ -2,15 +2,16 @@ import { Button, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./imageUpload.css";
+import toast from "react-hot-toast";
+import {uploadImage} from '../../Actions/imageActions'
 const ImageUpload = () => {
   const [imagePrev, setImagePrev] = useState('');
   const [image, setImage] = useState('');
 const [title, settitle] = useState("");
 const [description, setdescription] = useState("");
 
-  const { loading, error, message } = useSelector((state) => state.like);
+  const { loading, error, message } = useSelector((state) => state.images);
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -27,25 +28,26 @@ const [description, setdescription] = useState("");
   const submitHandler = async (e) => {
     e.preventDefault();
     const myForm =new FormData();
-    myForm.append("caption",caption)
+    myForm.append("title",title)
+    myForm.append("description",description)
+
     myForm.append("file",image)
 
 
-    await dispatch(createNewPost(myForm));
-    dispatch(loadUser());
+    await dispatch(uploadImage(myForm));
   };
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [dispatch, error, message, alert]);
+  }, [dispatch, error, message]);
 
   return (
     <div className="newPost">

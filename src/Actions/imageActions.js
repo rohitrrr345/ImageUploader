@@ -4,14 +4,20 @@ import axios from 'axios';
 export const uploadImage = (formData) => async (dispatch) => {
   try {
     dispatch({ type: 'uploadImageRequest' });
+    console.log('iam here')
 
-    const { data } = await axios.post(`${process.env.REACT_APP_SERVER}/api/images`, formData, {
+    const { data } = await axios.post(`${import.meta.env.VITE_SERVER}/api/images/upload`, formData, {
+
+      headers: {
+        'Content-type': 'multipart/form-data',
+      },
       withCredentials: true,
     });
-          
+    console.log('iam here')
+
     dispatch({
       type: 'uploadImageSuccess',
-      payload: data,
+      payload: data.message,
     });
   } catch (error) {
     dispatch({
@@ -25,7 +31,7 @@ export const fetchImages = () => async (dispatch) => {
   try {
     dispatch({ type: 'fetchImagesRequest' });
 
-    const { data } = await axios.get(`${process.env.REACT_APP_SERVER}/api/images`, {
+    const { data } = await axios.get(`${import.meta.env.VITE_SERVER}/api/images/images`, {
       withCredentials: true,
     });
 
@@ -41,17 +47,30 @@ export const fetchImages = () => async (dispatch) => {
   }
 };
 
-export const incrementViewCount = (imageId) => async (dispatch) => {
-  try {
-    const { data } = await axios.post(`${process.env.REACT_APP_SERVER}/api/images/${imageId}/views`, {}, {
-      withCredentials: true,
-    });
 
+
+export const incrementViewCount = (imageId) => async (dispatch) => {
+  // Dispatch request action to set loading state
+  dispatch({ type: 'incrementViewCountRequest' });
+
+  try {
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_SERVER}/api/images/image/${imageId}/views`,
+      {},
+      { withCredentials: true }
+    );
+
+    // Dispatch success action with the full image data
     dispatch({
       type: 'incrementViewCountSuccess',
-      payload: { imageId, viewCount: data.viewCount },
+      payload: data, // full image data returned from the API
     });
   } catch (error) {
+    // Dispatch failure action with error message
+    dispatch({
+      type: 'incrementViewCountFailure',
+      payload: error.message,
+    });
     console.error('Failed to increment view count:', error);
   }
 };

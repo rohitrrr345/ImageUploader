@@ -6,7 +6,9 @@ import ImageGallery from './Components/ImageGallary';
 import Login from './Components/Login/Login';
 import ImageUpload from './Components/Upload/imageUpload';
 import { loadUser } from './Actions/authActions';
-
+import Signup from './Components/SignUp/Signup';
+import Header from './Components/Header/Header';
+import './App.css'
 const App = () => {
   const { isAuthenticated,  message, error, loading } = useSelector(
     state => state.auth || {}
@@ -45,10 +47,12 @@ const App = () => {
   return (
     <>
       <Router>
+      {isAuthenticated && <Header />}
+
         <Routes>
           {/* Show ImageGallery if authenticated, else show Login */}
           <Route
-            path='/login'
+            path='/gallary'
             element={isAuthenticated ? <ImageGallery /> : <Login />}
           />
               <Route path='/upload' element={isAuthenticated ? <ImageUpload /> : <Login />}/>

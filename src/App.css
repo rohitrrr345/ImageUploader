@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Global font setting in App.css or index.css */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Optional: If you want different font weights for headings and paragraphs */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; /* Bold weight for headings */
+  }
+  
+  p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400; /* Regular weight for body text */
+  }
+  

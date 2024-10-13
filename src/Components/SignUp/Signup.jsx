@@ -1,14 +1,18 @@
 
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { signupUser } from '../actions/authActions';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Typography } from '@mui/material';
+import { Link } from "react-router-dom";
+
 import './Signup.css'
+import { signupUser } from '../../Actions/authActions';
+import toast from 'react-hot-toast';
 const Signup = () => {
   const [username, setUsername] = useState(''); // Step 1: State for username
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +25,12 @@ const Signup = () => {
     dispatch(signupUser(userData));
     
   };
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearErrors" });
+    }
+  }, [dispatch, error, alert]);
 
   return (
     <div className="register">

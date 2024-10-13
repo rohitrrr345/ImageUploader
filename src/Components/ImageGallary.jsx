@@ -1,21 +1,22 @@
-// ImageGallery.js
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchImages } from '../actions/imageActions';
 import ImageModal from './ImageModal';
+import { fetchImages } from '../Actions/imageActions';
+import ImgMediaCard from './Card/Card';
+import "./gallary.css";
 
 const ImageGallery = () => {
   const dispatch = useDispatch();
-  const images = useSelector((state) => state.images);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const imagesData = useSelector((state) => state.images);
+  const [selectedImage, setSelectedImage] = useState(null); // to hold selected image data
+  const [isModalOpen, setModalOpen] = useState(false); // to control modal visibility
 
   useEffect(() => {
     dispatch(fetchImages());
   }, [dispatch]);
 
   const openModal = (image) => {
-    setSelectedImage(image);
+    setSelectedImage(image); // pass the clicked image data to the state
     setModalOpen(true);
   };
 
@@ -25,17 +26,23 @@ const ImageGallery = () => {
   };
 
   return (
-    <div>
+    <div className='map'>
       <h2>Image Gallery</h2>
       <div className="gallery">
-        {/* {images.map((img) => ( */}
-          <div key={'mg._id'} className="image-card" onClick={() => openModal(img)}>
-            <img src={'img.imageUrl'} alt={'img.title'} />
-            <h3>{'img'}</h3>
-            <p>{'img'}</p>
-            <p>Views: {'img.viewCount'}</p>
-          </div>
-        {/* ))} */}
+        {imagesData.images?.images && Array.isArray(imagesData.images?.images) && imagesData.images.images.length > 0 ? (
+          imagesData.images.images.map((img) => (
+            <ImgMediaCard 
+              key={img._id} 
+              image={img.url} 
+              title={img.title} 
+              description={img.description} 
+              views={img.views} 
+              openModal={() => openModal(img)} // open modal with clicked image data
+            />
+          ))
+        ) : (
+          <p>No images available</p>
+        )}
       </div>
 
       {/* Modal for image details */}

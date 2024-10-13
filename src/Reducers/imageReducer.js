@@ -1,21 +1,20 @@
-// imageReducer.js
 import { createReducer } from '@reduxjs/toolkit';
 
-
 export const imageReducer = createReducer({}, {
+  // Upload image actions
   uploadImageRequest: (state) => {
     state.loading = true;
   },
   uploadImageSuccess: (state, action) => {
     state.loading = false;
-    state.images=action.payload.user;
-    state.message=action.payload.message;
+    state.message = action.payload;
   },
   uploadImageFailure: (state, action) => {
     state.loading = false;
     state.error = action.payload;
   },
 
+  // Fetch images actions
   fetchImagesRequest: (state) => {
     state.loading = true;
   },
@@ -28,10 +27,26 @@ export const imageReducer = createReducer({}, {
     state.error = action.payload;
   },
 
+  // Increment view count actions
+  incrementViewCountRequest: (state) => {
+    state.loading = true;
+  },
   incrementViewCountSuccess: (state, action) => {
-    const image = state.items.find((img) => img._id === action.payload.imageId);
-    if (image) {
-      image.viewCount = action.payload.viewCount;
-    }
+    state.loading = false;
+    state.viewCount = action.payload.viewCount; // Assuming the response contains viewCount
+  },
+  incrementViewCountFailure: (state, action) => {
+    state.loading = false;
+    state.error = action.payload;
+  },
+
+  // Clear error
+  clearError: (state) => {
+    state.error = null;
+  },
+
+  // Clear message
+  clearMessage: (state) => {
+    state.message = null;
   },
 });
