@@ -5,7 +5,7 @@ export const loginUser = (credentials) => async (dispatch) => {
   try {
     dispatch({ type: 'loginRequest' });
 
-    const { data } = await axios.post(`${import.meta.env.VITE_SERVER}/api/login`, credentials, {
+    const { data } = await axios.post(`${import.meta.env.VITE_SERVER}/api/users/login`, credentials, {
       headers: {
         'Content-Type': 'application/json',
       },
