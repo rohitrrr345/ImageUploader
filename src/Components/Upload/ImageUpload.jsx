@@ -36,6 +36,18 @@ const [description, setdescription] = useState("");
 
     await dispatch(uploadImage(myForm));
   };
+    useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearErrors" });
+    }
+
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+  }, [dispatch, error, message, toast]);
+
 
   useEffect(() => {
     if (error) {
