@@ -19,7 +19,7 @@ export const authReducer = createReducer(initialState, {
   },
   loginFailure: (state, action) => {
     state.loading = false;
-    state.isAuthenticated = false; // Should be false on failure
+    state.isAuthenticated = false; 
     state.error = action.payload;
   },
 
@@ -28,13 +28,13 @@ export const authReducer = createReducer(initialState, {
   },
   signupSuccess: (state, action) => {
     state.loading = false;
-    state.isAuthenticated = true; // Should be false on failure
+    state.isAuthenticated = true; 
 
     state.user = action.payload;
   },
   signupFailure: (state, action) => {
     state.loading = false;
-    state.isAuthenticated = false; // Should be false on failure
+    state.isAuthenticated = false; 
 
     state.error = action.payload;
   },

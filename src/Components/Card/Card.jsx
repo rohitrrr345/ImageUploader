@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 export default function ImgMediaCard({ image, title, description, views, openModal }) {
   return (
-    <Card sx={{ maxWidth: 345 }} onClick={openModal}> {/* Card click triggers modal */}
+    <Card sx={{ maxWidth: 345 }} onClick={openModal}> 
       <CardMedia
         component="img"
         alt={title}
