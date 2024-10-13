@@ -4,7 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import ImageGallery from './Components/ImageGallary';
 import Login from './Components/Login/Login';
-import ImageUpload from './Components/Upload/imageUpload';
+import ImageUpload from './Components/Upload/ImageUpload';
 import { loadUser } from './Actions/authActions';
 import Signup from './Components/SignUp/Signup';
 import Header from './Components/Header/Header';
